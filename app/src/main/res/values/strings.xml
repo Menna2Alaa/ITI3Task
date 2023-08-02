@@ -1,3 +1,5 @@
-<resources>
-    <string name="app_name">ITI Task</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="MissingTranslation">ITI Task</string>
+    <string name="username">UserName</string>
+    <string name="password">PassWord</string>
 </resources>
