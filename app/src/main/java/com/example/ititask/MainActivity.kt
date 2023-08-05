@@ -29,19 +29,21 @@ class MainActivity : AppCompatActivity() {
             } else if (binding.basketball.isChecked) {
                 sport = "your favorite sport is basketball"
             }
-            binding.male.setOnCheckedChangeListener { _, b ->
-                gender = if (b) {
-                    "you are a male"
-                } else {
-                    "you are a female"
-                }
+        }
+        println(sport)
+        binding.male.setOnCheckedChangeListener { _, b ->
+            gender = if (b) {
+                "you are a male"
+            } else {
+                "you are a female"
             }
         }
-       // val message = Toast.makeText(this,"welcome ${binding.editText.text},$sport,$gender",Toast.LENGTH_LONG).show()
-
+        println(gender)
         binding.login.setOnClickListener {
             val intent = Intent(this,SecondActivity::class.java)
-            //intent.putExtra("PRINT","welcome ${binding.editText.text},$sport ,$gender")
+            intent.putExtra("NAME",binding.editText.text.toString())
+            intent.putExtra("SPORT",sport)
+            intent.putExtra("GENDER",gender)
             startActivityForResult(intent,120)
 
         }

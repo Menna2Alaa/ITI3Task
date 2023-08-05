@@ -15,6 +15,9 @@ class SecondActivity : AppCompatActivity() {
         binding = SecondActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Toast.makeText(this,intent?.extras?.getString("NAME")?:"error",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,intent?.extras?.getString("SPORT")?:"error",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,intent?.extras?.getString("GENDER")?:"error",Toast.LENGTH_LONG).show()
 
         //var text= intent.extras?.getString("PRINT", "nothing")?:"nothing"
         //binding.tv.text=text
