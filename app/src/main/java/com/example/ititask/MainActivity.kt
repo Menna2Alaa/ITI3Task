@@ -1,8 +1,12 @@
 package com.example.ititask
 
-import androidx.appcompat.app.AppCompatActivity
+//import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ititask.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,11 +36,22 @@ class MainActivity : AppCompatActivity() {
                     "you are a female"
                 }
             }
-            println(gender)
-            binding.login.setOnClickListener {
-                Toast.makeText(this, "welcome ${binding.editText.text},$sport ,$gender", Toast.LENGTH_LONG).show()
-            }
+        }
+       // val message = Toast.makeText(this,"welcome ${binding.editText.text},$sport,$gender",Toast.LENGTH_LONG).show()
 
+        binding.login.setOnClickListener {
+            val intent = Intent(this,SecondActivity::class.java)
+            //intent.putExtra("PRINT","welcome ${binding.editText.text},$sport ,$gender")
+            startActivityForResult(intent,120)
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==120)
+        {
+            Toast.makeText(this,data?.extras?.getString("LOGIN BY")?:"error",Toast.LENGTH_LONG).show()
         }
     }
 }
