@@ -19,8 +19,6 @@ class SecondActivity : AppCompatActivity() {
         Toast.makeText(this,intent?.extras?.getString("SPORT")?:"error",Toast.LENGTH_LONG).show()
         Toast.makeText(this,intent?.extras?.getString("GENDER")?:"error",Toast.LENGTH_LONG).show()
 
-        //var text= intent.extras?.getString("PRINT", "nothing")?:"nothing"
-        //binding.tv.text=text
 
         binding.loginWith.setOnClickListener {
             val loginBy = if(binding.google.isChecked)
