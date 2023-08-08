@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -17,6 +18,7 @@
             android:layout_height="150dp"
             android:src="@drawable/sea"
             android:id="@+id/image"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <TextView
@@ -57,38 +59,20 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"/>
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/image2"
-            android:src="@drawable/like"
-            app:layout_constraintTop_toBottomOf="@id/facebook_post"
-            app:layout_constraintStart_toStartOf="@id/facebook_post"
-            android:layout_marginTop="25dp"/>
-        <Button
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comment"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:id="@+id/comment"
-            android:textColor="@color/black"
             android:backgroundTint="@color/purple_200"
-            app:layout_constraintTop_toBottomOf="@id/facebook_post"
-            app:layout_constraintStart_toEndOf="@id/image2"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="share"
-            android:textStyle="bold"
-            android:textSize="15dp"
+            android:text=" details"
+            app:cornerRadius="20dp"
             android:textColor="@color/black"
-            android:backgroundTint="@color/purple_200"
-            app:layout_constraintTop_toBottomOf="@id/facebook_post"
-            app:layout_constraintStart_toEndOf="@id/comment"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/facebook_post"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
