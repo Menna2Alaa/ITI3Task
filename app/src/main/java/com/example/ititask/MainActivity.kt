@@ -1,7 +1,9 @@
 package com.example.ititask
 
 //import android.net.Uri
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +17,7 @@ import com.example.ititask.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPref :SharedPreferences
     private var sport = ""
     private var gender = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPref= applicationContext.getSharedPreferences("UerPref", Context.MODE_PRIVATE)
+        /*binding.editText.setText(sharedPref.getString("USERNAME",""))
+        binding.edit.setText(sharedPref.getString("PASSWORD",""))*/
 
         binding.football.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -42,13 +49,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
         println(gender)
-        binding.login.setOnClickListener {
-            val intent = Intent(this,SecondActivity::class.java)
-            intent.putExtra("NAME",binding.editText.text.toString())
-            intent.putExtra("SPORT",sport)
-            intent.putExtra("GENDER",gender)
-            startActivityForResult(intent,120)
 
+        binding.login.setOnClickListener {
+            val editor = sharedPref.edit()
+            editor.putString("USERNAME",binding.editText.text.toString())
+            editor.putString("PASSWORD",binding.edit.text.toString())
+            editor.putBoolean("IS_LOGIN",true)
+            editor.commit()
+
+            val intent = Intent(this,SecondActivity::class.java)
+            /*intent.putExtra("NAME",binding.editText.text.toString())
+            intent.putExtra("SPORT",sport)
+            intent.putExtra("GENDER",gender)*/
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -87,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }*/
 
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == 120) {
                 Toast.makeText(
@@ -96,5 +110,5 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-        }
+        }*/
     }
