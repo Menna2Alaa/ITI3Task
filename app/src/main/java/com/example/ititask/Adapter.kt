@@ -3,9 +3,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ititask.databinding.TimelineBinding
+import com.example.ititask.model.User
 import com.squareup.picasso.Picasso
 
-class Adapter(private var timeline:ArrayList<Timeline>, private var listener : Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(private var userList:List<User>, private var listener : Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
     inner class ViewHolder (val binding : TimelineBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -14,18 +15,18 @@ class Adapter(private var timeline:ArrayList<Timeline>, private var listener : C
     }
 
     override fun getItemCount(): Int {
-        return timeline.size
+        return userList.size
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.name.text=timeline[position].userName
-        holder.binding.timePost.text=timeline[position].time
-        holder.binding.facebookPost.text=timeline[position].post
-        if(timeline[position].imageurl.isNotEmpty())
+        holder.binding.name.text="${userList[position].firstName} ${userList[position].lastName}"
+        holder.binding.timePost.text= "${userList[position].id}"
+        holder.binding.facebookPost.text=userList[position].email
+        if(userList[position].avatar.isNotEmpty())
         {
-            Picasso.get().load(timeline[position].imageurl).into(holder.binding.image)
+            Picasso.get().load(userList[position].avatar).into(holder.binding.image)
         }
         holder.binding.detail.setOnClickListener {
-            listener.onItemClicked(timeline[position],position)
+            //listener.onItemClicked(userList[position],position)
         }
     }
 }
