@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPref= applicationContext.getSharedPreferences("UerPref", Context.MODE_PRIVATE)
+        sharedPref= applicationContext.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
         /*binding.editText.setText(sharedPref.getString("USERNAME",""))
         binding.edit.setText(sharedPref.getString("PASSWORD",""))*/
 
