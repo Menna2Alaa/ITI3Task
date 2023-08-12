@@ -7,5 +7,4 @@ data class Support(
     var url : String ,
     @SerializedName("text")
     var text : String
-) {
-}
+)

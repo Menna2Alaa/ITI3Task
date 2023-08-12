@@ -1,5 +1,7 @@
 package com.example.ititask
 
+import com.example.ititask.model.Post
+
 interface Click {
-    fun onItemClicked(post : TimeLine, position : Int)
+    fun onItemClicked(post : Post, position : Int)
 }

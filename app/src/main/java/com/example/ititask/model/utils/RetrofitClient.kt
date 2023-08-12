@@ -6,14 +6,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    fun getInstance(): Retrofit {
+    fun getInstance(): ApiInterface {
         var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         var okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
-        var retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://reqres.in/")
+        return Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
-            .build()
-        return retrofit
+            .build().create(ApiInterface::class.java)
     }
 }
+
