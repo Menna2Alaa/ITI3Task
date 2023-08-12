@@ -11,11 +11,14 @@ class ThirdActivity : AppCompatActivity() {
         binding = ThirdActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.postId.text = "post_id : ${intent.extras?.getInt("post_id", 0).toString()}"
-        binding.commentId.text = "comment_id : ${intent.extras?.getInt("comment_id", 0).toString()}"
-        binding.nameId.text = "name : ${intent.extras?.getString("name", "")}"
-        binding.emailId.text = "email : ${intent.extras?.getString("email", "")}"
-        binding.comment.text = "body_comment : ${intent.extras?.getString("body", "")}"
+       val listItemCount = intent.extras?.getSerializable("list") as? MutableList<Comments>
+       listItemCount?.forEach { _ ->
+           binding.postId.text = "post_id : ${intent.extras?.getInt("post_id", 0).toString()}"
+           binding.commentId.text = "comment_id : ${intent.extras?.getInt("comment_id", 0).toString()}"
+           binding.nameId.text = "name : ${intent.extras?.getString("name", "")}"
+           binding.emailId.text = "email : ${intent.extras?.getString("email", "")}"
+           binding.comment.text = "body_comment : ${intent.extras?.getString("body", "")}"
+       }
 
         /*Toast.makeText(this, intent?.extras?.getString("USERNAME") ?: "error", Toast.LENGTH_LONG).show()
         Toast.makeText(this, intent?.extras?.getString("POST") ?: "error", Toast.LENGTH_LONG).show()*/

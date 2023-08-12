@@ -14,6 +14,7 @@ import com.example.ititask.model.Comments
 import com.example.ititask.model.Post
 import com.example.ititask.model.utils.ApiInterface
 import com.example.ititask.model.utils.RetrofitClient
+import java.io.Serializable
 
 class SecondActivity : AppCompatActivity() ,Click {
     private lateinit var binding: SecondActivityBinding
@@ -114,13 +115,15 @@ class SecondActivity : AppCompatActivity() ,Click {
             try {
                 val response = retrofit.getComments(post.id)
                 if (response.isSuccessful) {
-                    val comment = response.body()?.get(0)
+                    val comments = response.body()
                     val intent = Intent(this@SecondActivity, ThirdActivity::class.java)
-                    intent.putExtra("post_id", comment?.postId)
-                    intent.putExtra("comment_id", comment?.id)
-                    intent.putExtra("name", comment?.name)
-                    intent.putExtra("email", comment?.email)
-                    intent.putExtra("body", comment?.body)
+                    intent.putExtra("list", comments as Serializable)
+                    val comment = comments[position]
+                    intent.putExtra("post_id", comment.postId)
+                    intent.putExtra("comment_id", comment.id)
+                    intent.putExtra("name", comment.name)
+                    intent.putExtra("email", comment.email)
+                    intent.putExtra("body", comment.body)
                     startActivity(intent)
                 } else {
                     Toast.makeText(
