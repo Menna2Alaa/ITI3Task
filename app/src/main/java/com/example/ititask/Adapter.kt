@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ititask.databinding.TimelineBinding
 import com.example.ititask.model.Post
 
-class Adapter(private var postsList:List<Post>, private var listener : Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(private var postsList:List<Post> ,private var listener: Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
     inner class ViewHolder (val binding : TimelineBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +26,7 @@ class Adapter(private var postsList:List<Post>, private var listener : Click): R
             Picasso.get().load(userList[position].avatar).into(holder.binding.image)
         }*/
         holder.binding.detail.setOnClickListener {
-            listener.onItemClicked(postsList[position],position)
+            listener.onItemClicked(postsList[position], position)
         }
     }
 }

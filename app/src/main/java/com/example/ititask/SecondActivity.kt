@@ -14,9 +14,8 @@ import com.example.ititask.model.Comments
 import com.example.ititask.model.Post
 import com.example.ititask.model.utils.ApiInterface
 import com.example.ititask.model.utils.RetrofitClient
-import java.io.Serializable
 
-class SecondActivity : AppCompatActivity() ,Click {
+class SecondActivity : AppCompatActivity() ,Click  {
     private lateinit var binding: SecondActivityBinding
     private lateinit var postAdapter: Adapter
     private lateinit var sharedPref: SharedPreferences
@@ -31,14 +30,14 @@ class SecondActivity : AppCompatActivity() ,Click {
 
         sharedPref = applicationContext.getSharedPreferences("UserPref", MODE_PRIVATE)
 
-        retrofit = RetrofitClient.getInstance()
+        retrofit = RetrofitClient.getInstance("https://jsonplaceholder.typicode.com/")
 
         binding.postsBtn.setOnClickListener {
             lifecycleScope.launchWhenCreated {
                 try {
                     val response = retrofit.getPostsByUser(binding.et.text.toString().toInt())
                     if (response.isSuccessful) {
-                        postAdapter = Adapter(response.body() ?: listOf(), this@SecondActivity)
+                        postAdapter = Adapter(response.body() ?: listOf(),this@SecondActivity)
                         binding.recyclerView.layoutManager =
                             LinearLayoutManager(this@SecondActivity)
                         binding.recyclerView.adapter = postAdapter
@@ -113,13 +112,15 @@ class SecondActivity : AppCompatActivity() ,Click {
     override fun onItemClicked(post: Post, position: Int) {
         lifecycleScope.launchWhenCreated {
             try {
-                val response = retrofit.getComments(post.id)
-                if (response.isSuccessful) {
-                    val comments = response.body()
+                /*val response = retrofit.getComments(post.id)*/
+                /*if (response.isSuccessful) {
+                    val comments = response.body()*/
                     val intent = Intent(this@SecondActivity, ThirdActivity::class.java)
-                    intent.putExtra("list", comments as Serializable)
-                    val comment = comments[position]
-                    intent.putExtra("post_id", comment.postId)
+                    intent.putExtra("post_id", post.id)
+                    startActivity(intent)
+                    /*intent.putExtra("list", comments as Serializable)
+                    val comment = comments[position]*/
+                    /*intent.putExtra("post_id", comment.postId)
                     intent.putExtra("comment_id", comment.id)
                     intent.putExtra("name", comment.name)
                     intent.putExtra("email", comment.email)
@@ -131,7 +132,7 @@ class SecondActivity : AppCompatActivity() ,Click {
                         "Error retrieving comments",
                         Toast.LENGTH_LONG
                     ).show()
-                }
+                }*/
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(

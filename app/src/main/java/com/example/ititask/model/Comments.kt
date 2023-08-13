@@ -13,7 +13,5 @@ data class Comments (
     var email : String,
     @SerializedName("body")
     var body : String
-):Serializable{
-
-}
+)
 

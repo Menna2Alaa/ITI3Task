@@ -1,7 +1,8 @@
 package com.example.ititask
 
+import com.example.ititask.model.Comments
 import com.example.ititask.model.Post
 
 interface Click {
-    fun onItemClicked(post : Post, position : Int)
+    fun onItemClicked(post: Post, position: Int)
 }

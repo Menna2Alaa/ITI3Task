@@ -23,17 +23,18 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="20dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="username"
+            android:text="kminchelle"
             android:textSize="30sp"
             android:id="@+id/edit_text"
             android:inputType="text"
             app:layout_constraintTop_toTopOf="@+id/user_text"
             app:layout_constraintStart_toEndOf="@+id/user_text"
-            android:layout_marginStart="25dp"/>
+            android:layout_marginStart="20dp"/>
 
         <TextView
             android:id="@+id/password_text"
@@ -46,17 +47,17 @@
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/user_text"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="25dp"/>
+            android:layout_margin="20dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="password"
             android:textSize="30sp"
             android:id="@+id/edit"
-            android:inputType="numberPassword"
+            android:text="0lelplR"
             app:layout_constraintTop_toTopOf="@+id/password_text"
             app:layout_constraintStart_toEndOf="@+id/password_text"
-            android:layout_marginStart="25dp"/>
+            android:layout_marginStart="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +69,8 @@
             android:id="@+id/favorite_sport"
             app:layout_constraintTop_toBottomOf="@+id/password_text"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="25dp"
+            android:layout_margin="20dp"/>
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +81,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="25dp"
             android:textColor="#9269DA"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/football"
             app:layout_constraintStart_toStartOf="@+id/football"
             android:textColor="#9269DA"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,7 +107,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/radio_group"
             app:layout_constraintTop_toBottomOf="@+id/basketball"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

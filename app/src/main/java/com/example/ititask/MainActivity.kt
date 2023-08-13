@@ -12,12 +12,19 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.ititask.databinding.ActivityMainBinding
+import com.example.ititask.model.LoginBody
+import com.example.ititask.model.utils.ApiInterface
+import com.example.ititask.model.utils.RetrofitClient
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var sharedPref :SharedPreferences
+    private lateinit var retrofit : ApiInterface
+
     private var sport = ""
     private var gender = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         sharedPref= applicationContext.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
         /*binding.editText.setText(sharedPref.getString("USERNAME",""))
         binding.edit.setText(sharedPref.getString("PASSWORD",""))*/
+
+        retrofit=RetrofitClient.getInstance("https://dummyjson.com/")
+
 
         binding.football.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -51,19 +61,41 @@ class MainActivity : AppCompatActivity() {
         println(gender)
 
         binding.login.setOnClickListener {
-            val editor = sharedPref.edit()
-            editor.putString("USERNAME",binding.editText.text.toString())
-            editor.putString("PASSWORD",binding.edit.text.toString())
-            editor.putBoolean("IS_LOGIN",true)
-            editor.commit()
-
-            val intent = Intent(this,SecondActivity::class.java)
-            /*intent.putExtra("NAME",binding.editText.text.toString())
-            intent.putExtra("SPORT",sport)
-            intent.putExtra("GENDER",gender)*/
-            startActivity(intent)
-            finish()
+            lifecycleScope.launchWhenCreated {
+                try {
+                    val response = retrofit.login(
+                        LoginBody(
+                            binding.editText.text.toString(),
+                            binding.edit.text.toString()
+                        )
+                    )
+                    if (response.isSuccessful) {
+                        goToSecondScreen()
+                    } else {
+                        val json = JSONObject(response.errorBody()?.string())
+                        Toast.makeText(this@MainActivity,json.getString("message") , Toast.LENGTH_LONG).show()
+                    }
+                }catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "An error occurred: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
         }
+    }
+    private fun goToSecondScreen()
+    {
+        val editor = sharedPref.edit()
+        editor.putString("USERNAME",binding.editText.text.toString())
+        editor.putString("PASSWORD",binding.edit.text.toString())
+        editor.putBoolean("IS_LOGIN",true)
+        editor.commit()
+        val intent = Intent(this,SecondActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
