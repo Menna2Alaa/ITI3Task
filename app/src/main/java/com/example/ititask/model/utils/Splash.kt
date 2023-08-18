@@ -1,4 +1,4 @@
-package com.example.ititask
+package com.example.ititask.model.utils
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ititask.databinding.SplashBinding
+import com.example.ititask.ui.login.LoginActivity
+import com.example.ititask.ui.second_activity.SecondActivity
 
 class Splash:AppCompatActivity() {
     private lateinit var binding: SplashBinding
@@ -24,10 +26,10 @@ class Splash:AppCompatActivity() {
         Handler().postDelayed(Runnable{
             if(isLogged)
             {
-                startActivity(Intent(this,SecondActivity::class.java))
+                startActivity(Intent(this, SecondActivity::class.java))
             }
             else{
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
             }
             finish()
         },3000)

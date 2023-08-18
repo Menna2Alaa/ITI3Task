@@ -1,11 +1,11 @@
-package com.example.ititask
+package com.example.ititask.model.utils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ititask.databinding.TimelineBinding
-import com.example.ititask.model.Post
+import com.example.ititask.model.body.Post
 
-class Adapter(private var postsList:List<Post> ,private var listener: Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(private var postsList:List<Post>, private var listener: Click): RecyclerView.Adapter<Adapter.ViewHolder>() {
     inner class ViewHolder (val binding : TimelineBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -1,4 +1,4 @@
-package com.example.ititask.model
+package com.example.ititask.model.body
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,6 @@
-package com.example.ititask.model
+package com.example.ititask.model.response
+import com.example.ititask.model.body.Support
+import com.example.ititask.model.body.Post
 import com.google.gson.annotations.SerializedName
 
 data class ResponseUsers(

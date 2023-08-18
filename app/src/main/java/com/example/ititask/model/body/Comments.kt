@@ -1,4 +1,4 @@
-package com.example.ititask.model
+package com.example.ititask.model.body
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -14,4 +14,3 @@ data class Comments (
     @SerializedName("body")
     var body : String
 )
-

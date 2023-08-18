@@ -1,4 +1,4 @@
-package com.example.ititask
+package com.example.ititask.model.utils
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,3 +14,4 @@ data class TimeLine(var userName : String, var time : String, var post : String,
 
     }
 }
+

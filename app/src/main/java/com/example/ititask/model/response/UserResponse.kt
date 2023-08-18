@@ -1,4 +1,4 @@
-package com.example.ititask.model
+package com.example.ititask.model.response
 
 import com.google.gson.annotations.SerializedName
 
@@ -18,5 +18,5 @@ data class UserResponse(
     @SerializedName("image")
     var image : String,
     @SerializedName("token")
-     var token : String
+    var token : String
 )

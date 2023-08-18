@@ -1,10 +1,9 @@
 package com.example.ititask.model.utils
 
-import com.example.ititask.model.Comments
-import com.example.ititask.model.LoginBody
-import com.example.ititask.model.Post
-import com.example.ititask.model.ResponseUsers
-import com.example.ititask.model.UserResponse
+import com.example.ititask.model.body.Comments
+import com.example.ititask.model.body.LoginBody
+import com.example.ititask.model.body.Post
+import com.example.ititask.model.response.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

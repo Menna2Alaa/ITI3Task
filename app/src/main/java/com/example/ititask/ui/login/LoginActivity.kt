@@ -1,29 +1,19 @@
-package com.example.ititask
+package com.example.ititask.ui.login
 
-//import android.net.Uri
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import com.example.ititask.R
 import com.example.ititask.databinding.ActivityMainBinding
-import com.example.ititask.model.LoginBody
-import com.example.ititask.model.utils.ApiInterface
-import com.example.ititask.model.utils.RetrofitClient
-import org.json.JSONObject
+import com.example.ititask.ui.second_activity.SecondActivity
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sharedPref :SharedPreferences
-    private lateinit var retrofit : ApiInterface
+    //private lateinit var sharedPref: SharedPreferences
+    private lateinit var viewModel: LoginViewModel
 
     private var sport = ""
     private var gender = ""
@@ -34,12 +24,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPref= applicationContext.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
-        /*binding.editText.setText(sharedPref.getString("USERNAME",""))
-        binding.edit.setText(sharedPref.getString("PASSWORD",""))*/
-
-        retrofit=RetrofitClient.getInstance("https://dummyjson.com/")
-
+        viewModel = LoginViewModel()
+        //sharedPref= applicationContext.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+        viewModel.loginData.observe(this) {
+            Toast.makeText(this, "welcome ${it.body()?.firstname}", Toast.LENGTH_LONG).show()
+        }
 
         binding.football.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -61,39 +50,13 @@ class MainActivity : AppCompatActivity() {
         println(gender)
 
         binding.login.setOnClickListener {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    val response = retrofit.login(
-                        LoginBody(
-                            binding.editText.text.toString(),
-                            binding.edit.text.toString()
-                        )
-                    )
-                    if (response.isSuccessful) {
-                        goToSecondScreen()
-                    } else {
-                        val json = JSONObject(response.errorBody()?.string())
-                        Toast.makeText(this@MainActivity,json.getString("message") , Toast.LENGTH_LONG).show()
-                    }
-                }catch (e: Exception) {
-                    e.printStackTrace()
-                    Toast.makeText(
-                        this@MainActivity,
-                        "An error occurred: ${e.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
+            binding.loading.visibility= View.VISIBLE
+            viewModel.startLogin(binding.editText.text.toString() , binding.edit.text.toString())
+            goToSecondScreen()
         }
     }
-    private fun goToSecondScreen()
-    {
-        val editor = sharedPref.edit()
-        editor.putString("USERNAME",binding.editText.text.toString())
-        editor.putString("PASSWORD",binding.edit.text.toString())
-        editor.putBoolean("IS_LOGIN",true)
-        editor.commit()
-        val intent = Intent(this,SecondActivity::class.java)
+    private fun goToSecondScreen() {
+        val intent = Intent(this, SecondActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -144,3 +107,6 @@ class MainActivity : AppCompatActivity() {
             }
         }*/
     }
+/*binding.editText.setText(sharedPref.getString("USERNAME",""))
+       binding.edit.setText(sharedPref.getString("PASSWORD",""))*/
+//retrofit= RetrofitClient.getInstance("https://dummyjson.com/")
